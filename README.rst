@@ -2,8 +2,8 @@
 pydiff
 ======
 
-Diffs Python code at the bytecode level. This for checking for changes to the
-actual code structure while ignoring formatting changes.
+Diffs Python code at the bytecode level. This is useful for checking for
+changes to the actual code structure while ignoring formatting changes.
 
 
 Example
