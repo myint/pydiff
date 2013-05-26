@@ -68,9 +68,11 @@ def tree(code):
                                                    'co_firstlineno']:
             dictionary[name] = getattr(code, name)
 
-    for index, _object in enumerate(code.co_consts):
+    for _object in code.co_consts:
         if isinstance(_object, types.CodeType):
             _object = tree(_object)
+
+        dictionary['co_consts'].append(_object)
 
     return dictionary
 
