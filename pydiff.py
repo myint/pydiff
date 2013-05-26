@@ -22,6 +22,7 @@
 """Diff two Python files at the bytecode level."""
 
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import difflib
 import pprint
