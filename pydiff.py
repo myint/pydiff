@@ -30,6 +30,12 @@ import pprint
 import types
 
 
+try:
+    basestring
+except NameError:
+    basestring = str
+
+
 __version__ = '0.1'
 
 
@@ -72,13 +78,23 @@ def tree(code):
                                                    'co_firstlineno']:
             dictionary[name] = getattr(code, name)
 
-    for _object in code.co_consts:
+    for index, _object in enumerate(code.co_consts):
         if isinstance(_object, types.CodeType):
             _object = tree(_object)
+
+        # Ignore leading/trailing whitespace changes docstrings.
+        if index == 0 and isinstance(_object, basestring):
+            _object = '\n'.join(
+                [line.strip() for line in _object.splitlines()])
 
         dictionary['co_consts'].append(_object)
 
     for op in code.co_code:
+        try:
+            op = ord(op)
+        except TypeError:
+            pass
+
         dictionary['co_code'].append(opcode.opname[op])
 
     return dictionary
