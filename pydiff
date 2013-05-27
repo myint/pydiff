@@ -38,6 +38,7 @@ except AttributeError:
 
 try:
     sys.exit(pydiff.main(sys.argv,
-                         standard_out=sys.stdout))
+                         standard_out=sys.stdout,
+                         standard_error=sys.stderr))
 except KeyboardInterrupt:
     sys.exit(2)

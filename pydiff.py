@@ -38,6 +38,11 @@ except NameError:
 __version__ = '0.1.2'
 
 
+class DisassembleSyntaxError(SyntaxError):
+
+    """Raised if syntax error is detected while disassembling."""
+
+
 def diff_bytecode_of_files(filename_a, filename_b):
     """Return diff of the bytecode of the two files."""
     with open_with_encoding(filename_a) as file_a:
@@ -46,22 +51,29 @@ def diff_bytecode_of_files(filename_a, filename_b):
     with open_with_encoding(filename_b) as file_b:
         source_b = file_b.read()
 
-    return diff_bytecode(source_a, source_b)
+    return diff_bytecode(source_a, source_b,
+                         filename_a, filename_b)
 
 
-def diff_bytecode(source_a, source_b):
+def diff_bytecode(source_a, source_b,
+                  filename_a='', filename_b=''):
     """Return diff of the bytecode of the two sources."""
-    bytecode_a = disassemble(source_a)
-    bytecode_b = disassemble(source_b)
+    bytecode_a = disassemble(source_a, filename_a)
+    bytecode_b = disassemble(source_b, filename_b)
 
     return ''.join(difflib.unified_diff(
         pprint.pformat(bytecode_a).splitlines(True),
-        pprint.pformat(bytecode_b).splitlines(True)))
+        pprint.pformat(bytecode_b).splitlines(True),
+        filename_a,
+        filename_b))
 
 
-def disassemble(source):
+def disassemble(source, filename=''):
     """Return dictionary of disassembly."""
-    return tree(compile(source, '<string>', 'exec'))
+    try:
+        return tree(compile(source, '<string>', 'exec'))
+    except SyntaxError as exception:
+        raise DisassembleSyntaxError(exception)
 
 
 def tree(code):
@@ -138,8 +150,13 @@ def parse_args(argv):
     return args
 
 
-def main(argv, standard_out):
+def main(argv, standard_out, standard_error):
     """Return exit status."""
     args = parse_args(argv)
 
-    standard_out.write(diff_bytecode_of_files(args.files[0], args.files[1]))
+    try:
+        diff = diff_bytecode_of_files(args.files[0], args.files[1])
+        if diff:
+            standard_out.write(diff + '\n')
+    except DisassembleSyntaxError as exception:
+        standard_error.write(str(exception) + '\n')

@@ -20,6 +20,10 @@ class UnitTests(unittest.TestCase):
             pydiff.disassemble('def main(): pass'),
             pydiff.disassemble('def main(): x = 1'))
 
+    def test_disassemble_with_bad_syntax(self):
+        with self.assertRaises(pydiff.DisassembleSyntaxError):
+            pydiff.disassemble('def main():')
+
     def test_diff_bytecode(self):
         self.assertTrue(
             pydiff.diff_bytecode('x = 1', 'x=2'))
