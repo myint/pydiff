@@ -82,9 +82,9 @@ def tree(code):
         if isinstance(_object, types.CodeType):
             _object = tree(_object)
 
-        # Ignore leading/trailing whitespace changes docstrings.
+        # Ignore whitespace changes in docstrings.
         if index == 0 and isinstance(_object, basestring):
-            _object = '\n'.join(
+            _object = ' '.join(
                 [line.strip() for line in _object.splitlines()])
 
         dictionary['co_consts'].append(_object)
