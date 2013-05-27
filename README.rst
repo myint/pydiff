@@ -2,6 +2,10 @@
 pydiff
 ======
 
+.. image:: https://travis-ci.org/myint/pydiff.png?branch=master
+   :target: https://travis-ci.org/myint/pydiff
+   :alt: Build status
+
 pydiff diffs Python code at the bytecode level. This is useful for checking for
 changes to the actual code structure while ignoring formatting changes.
 
