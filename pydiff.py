@@ -72,8 +72,14 @@ def disassemble(source, filename=''):
     """Return dictionary of disassembly."""
     try:
         return tree(compile(source, '<string>', 'exec'))
-    except SyntaxError as exception:
-        raise DisassembleSyntaxError(exception)
+    except SyntaxError as syntax_error:
+        exception = DisassembleSyntaxError()
+        exception.filename = filename
+        exception.msg = syntax_error.msg
+        exception.text = syntax_error.text
+        exception.lineno = syntax_error.lineno
+        exception.offset = syntax_error.offset
+        raise exception
 
 
 def tree(code):
@@ -159,4 +165,10 @@ def main(argv, standard_out, standard_error):
         if diff:
             standard_out.write(diff + '\n')
     except DisassembleSyntaxError as exception:
-        standard_error.write(str(exception) + '\n')
+        standard_error.write(
+            '{0}:{1} invalid syntax\n'.format(
+                exception.filename,
+                exception.lineno))
+
+        standard_error.write(str(exception.text))
+        standard_error.write((exception.offset * ' ')[:-1] + '^\n')
