@@ -19,7 +19,7 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-"""Diff two Python files at the bytecode level."""
+"""Diffs two Python files at the bytecode level."""
 
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -118,11 +118,7 @@ def parse_args(argv):
 
 
 def main(argv, standard_out):
-    """Return exit status.
-
-    0 means no error.
-
-    """
+    """Return exit status."""
     args = parse_args(argv)
 
     standard_out.write(diff_bytecode_of_files(args.files[0], args.files[1]))

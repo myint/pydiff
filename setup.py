@@ -19,7 +19,7 @@ def version():
 with open('README.rst') as readme:
     core.setup(name='pydiff',
                version=version(),
-               description='Diff two Python files at the bytecode level.',
+               description='Diffs two Python files at the bytecode level.',
                long_description=readme.read(),
                license='Expat License',
                author='Steven Myint',
