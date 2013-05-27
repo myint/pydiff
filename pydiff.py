@@ -50,7 +50,7 @@ def diff_bytecode(source_a, source_b):
 
     return ''.join(difflib.unified_diff(
         pprint.pformat(bytecode_a).splitlines(True),
-        pprint.pformat(bytecode_b).splitlines(True))) + '\n'
+        pprint.pformat(bytecode_b).splitlines(True)))
 
 
 def disassemble(source):
