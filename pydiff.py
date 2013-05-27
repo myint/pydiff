@@ -25,6 +25,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import difflib
+import opcode
 import pprint
 import types
 
@@ -60,7 +61,9 @@ def disassemble(source):
 
 def tree(code):
     """Return dictionary representation of the code object."""
-    dictionary = {'co_consts': []}
+    dictionary = {'co_consts': [],
+                  'co_code': []}
+
     for name in dir(code):
         if name.startswith('co_') and name not in ['co_code',
                                                    'co_consts',
@@ -74,6 +77,9 @@ def tree(code):
             _object = tree(_object)
 
         dictionary['co_consts'].append(_object)
+
+    for op in code.co_code:
+        dictionary['co_code'].append(opcode.opname[op])
 
     return dictionary
 
