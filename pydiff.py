@@ -100,7 +100,7 @@ def tree(code):
             _object = tree(_object)
 
         # Ignore whitespace changes in docstrings.
-        # FIXME: We currently use 2 instead of 1 due to class names.
+        # We use 2 instead of 1 due to class names.
         if index < 2 and isinstance(_object, basestring):
             _object = ' '.join(
                 [line.strip() for line in _object.splitlines()])
