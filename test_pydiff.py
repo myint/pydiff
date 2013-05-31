@@ -31,6 +31,15 @@ class UnitTests(unittest.TestCase):
         self.assertFalse(
             pydiff.diff_bytecode('x = 1', 'x=1'))
 
+    def test_diff_bytecode_should_ignore_docstrings(self):
+        self.assertFalse(
+            pydiff.diff_bytecode('def main(): """foo  """',
+                                 'def main(): """foo"""'))
+
+        self.assertFalse(
+            pydiff.diff_bytecode('class Foo(object): """foo  """',
+                                 'class Foo(object): """foo"""'))
+
     def test_diff_bytecode_of_files(self):
         self.assertTrue(
             pydiff.diff_bytecode_of_files(
