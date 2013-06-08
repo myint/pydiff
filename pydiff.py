@@ -71,7 +71,7 @@ def diff_bytecode(source_a, source_b,
 def disassemble(source, filename=''):
     """Return dictionary of disassembly."""
     try:
-        return tree(compile(source, '<string>', 'exec'))
+        return tree(compile(source, '<string>', 'exec', dont_inherit=True))
     except SyntaxError as syntax_error:
         exception = DisassembleSyntaxError()
         exception.filename = filename
