@@ -1,11 +1,12 @@
-.*.swp
+*.egg*/
 *.pyc
+.*.swp
+.coverage
+.tox/
+.travis-solo
 MANIFEST
 README.html
 __pycache__/
-.tox/
 build/
 dist/
 htmlcov/
-*.egg*/
-.coverage
