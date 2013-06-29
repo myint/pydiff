@@ -3,8 +3,8 @@ pydiff
 ======
 
 .. image:: https://travis-ci.org/myint/pydiff.png?branch=master
-   :target: https://travis-ci.org/myint/pydiff
-   :alt: Build status
+    :target: https://travis-ci.org/myint/pydiff
+    :alt: Build status
 
 pydiff diffs Python code at the bytecode level. This is useful for checking for
 changes to the actual code structure while ignoring formatting changes.
@@ -28,10 +28,10 @@ Example
     import os, sys
     def main():
 
-       x = len(sys.argv) + 100
+        x = len(sys.argv) + 100
 
-       y            = x+77
-       print(y)
+        y            = x+77
+        print(y)
 
 ``bar.py``:
 
@@ -42,9 +42,9 @@ Example
 
 
     def main():
-       x = len(sys.argv) + 101
-       y = x + 77
-       print(y)
+        x = len(sys.argv) + 101
+        y = x + 77
+        print(y)
 
 ``$ pydiff foo.py bar.py``:
 
