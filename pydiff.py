@@ -23,6 +23,7 @@
 
 from __future__ import unicode_literals
 
+import ast
 import difflib
 import opcode
 import pprint
@@ -58,6 +59,13 @@ def diff_bytecode_of_files(filename_a, filename_b):
 def diff_bytecode(source_a, source_b,
                   filename_a='', filename_b=''):
     """Return diff of the bytecode of the two sources."""
+    # Compare AST first to avoid some false positives.
+    if (
+        ast.dump(ast.parse(source_a, '<string>', 'exec')) ==
+        ast.dump(ast.parse(source_b, '<string>', 'exec'))
+    ):
+        return ''
+
     bytecode_a = disassemble(source_a, filename_a)
     bytecode_b = disassemble(source_b, filename_b)
 
