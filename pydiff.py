@@ -55,10 +55,7 @@ def diff_bytecode(source_a, source_b,
                   filename_a='', filename_b=''):
     """Return diff of the bytecode of the two sources."""
     # Compare AST first to avoid some false positives.
-    if (
-        ast.dump(ast.parse(source_a, '<string>', 'exec')) ==
-        ast.dump(ast.parse(source_b, '<string>', 'exec'))
-    ):
+    if dump_ast(source_a, filename_a) == dump_ast(source_b, filename_b):
         return ''
 
     bytecode_a = disassemble(source_a, filename_a)
@@ -71,9 +68,17 @@ def diff_bytecode(source_a, source_b,
         filename_b))
 
 
-def disassemble(source, filename=''):
+def disassemble(source, filename=None):
     """Return dictionary of disassembly."""
-    return tree(compile(source, '<string>', 'exec', dont_inherit=True))
+    return tree(compile(source,
+                        filename or '<string>',
+                        'exec',
+                        dont_inherit=True))
+
+
+def dump_ast(source, filename=None):
+    """Return AST."""
+    return ast.dump(ast.parse(source, filename or '<string>', 'exec'))
 
 
 def tree(code):
