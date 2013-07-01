@@ -21,7 +21,7 @@ class UnitTests(unittest.TestCase):
             pydiff.disassemble('def main(): x = 1'))
 
     def test_disassemble_with_bad_syntax(self):
-        with self.assertRaises(pydiff.DisassembleSyntaxError):
+        with self.assertRaises(SyntaxError):
             pydiff.disassemble('def main():')
 
     def test_diff_bytecode(self):
