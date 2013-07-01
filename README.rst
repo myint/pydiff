@@ -50,14 +50,14 @@ Example
 
 .. code-block:: diff
 
-  ---
-  +++
-  @@ -4,7 +4,7 @@
-                  None,
-                  {'co_argcount': 0,
-                   'co_cellvars': (),
-  -                'co_consts': [None, 100, 77],
-  +                'co_consts': [None, 101, 77],
-                   'co_flags': 67,
-                   'co_freevars': (),
-                   'co_kwonlyargcount': 0,
+    --- foo.py
+    +++ bar.py
+    @@ -87,7 +87,7 @@
+                                 '<0>',
+                                 '<0>',
+                                 'RETURN_VALUE'],
+    -                'co_consts': [None, 100, 77],
+    +                'co_consts': [None, 101, 77],
+                     'co_flags': 67,
+                     'co_freevars': (),
+                     'co_kwonlyargcount': 0,
