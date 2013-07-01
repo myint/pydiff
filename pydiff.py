@@ -36,7 +36,7 @@ except NameError:
     basestring = str
 
 
-__version__ = '0.1.3'
+__version__ = '0.2'
 
 
 def diff_bytecode_of_files(filename_a, filename_b):
