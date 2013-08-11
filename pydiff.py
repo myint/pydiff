@@ -170,5 +170,6 @@ def main(argv, standard_out, standard_error):
                 exception.filename,
                 exception.lineno))
 
-        standard_error.write(str(exception.text))
-        standard_error.write((exception.offset * ' ')[:-1] + '^\n')
+        if exception.text:
+            standard_error.write(str(exception.text))
+            standard_error.write((exception.offset * ' ')[:-1] + '^\n')
