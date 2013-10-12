@@ -7,7 +7,7 @@ check:
 		--disable=C0103,E1103 \
 		--rcfile=/dev/null \
 		pydiff.py setup.py
-	check-manifest --ignore=.travis.yml,Makefile
+	check-manifest
 	python setup.py --long-description | rst2html --strict > /dev/null
 	scspell pydiff pydiff.py setup.py test_pydiff.py README.rst
 
