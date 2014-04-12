@@ -2,7 +2,7 @@
 pydiff
 ======
 
-.. image:: https://travis-ci.org/myint/pydiff.png?branch=master
+.. image:: https://travis-ci.org/myint/pydiff.svg?branch=master
     :target: https://travis-ci.org/myint/pydiff
     :alt: Build status
 
