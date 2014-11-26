@@ -8,7 +8,7 @@ check:
 		--rcfile=/dev/null \
 		pydiff.py setup.py
 	check-manifest
-	python setup.py --long-description | rst2html --strict > /dev/null
+	python setup.py --long-description | rstcheck -
 	scspell pydiff pydiff.py setup.py test_pydiff.py README.rst
 
 readme:
